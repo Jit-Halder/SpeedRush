@@ -1,0 +1,675 @@
+.game-shell {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 520px;
+  overflow: hidden;
+  background: #91c9ef;
+  color: #fff;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  isolation: isolate;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.game-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.game-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.game-shell::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8, 15, 26, 0.55), transparent 25%),
+    linear-gradient(0deg, rgba(8, 15, 26, 0.65), transparent 30%),
+    linear-gradient(90deg, rgba(8, 15, 26, 0.2), transparent 45%);
+}
+
+.top-hud,
+.speed-panel,
+.race-info,
+.control-hint,
+.mobile-controls,
+.game-footer,
+.game-over {
+  position: absolute;
+  z-index: 2;
+}
+
+.top-hud {
+  top: 26px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 950;
+  letter-spacing: 2px;
+}
+
+.brand p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  background: rgba(9, 18, 31, 0.55);
+  backdrop-filter: blur(12px);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.status-dot,
+.footer-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #55f3a5;
+  box-shadow: 0 0 12px rgba(85, 243, 165, 0.8);
+}
+
+.status-pill.danger .status-dot {
+  background: #ff5c64;
+  box-shadow: 0 0 12px rgba(255, 92, 100, 0.8);
+}
+
+.speed-panel {
+  top: 120px;
+  left: 30px;
+  width: 230px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  background: rgba(10, 18, 31, 0.55);
+  backdrop-filter: blur(16px);
+}
+
+.panel-label,
+.info-label {
+  display: block;
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.speed-number {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 51px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.speed-number span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.speed-track {
+  height: 5px;
+  margin-top: 19px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.17);
+}
+
+.speed-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #55f3a5, #eaff87, #ff705e);
+  transition: width 100ms linear;
+}
+
+.speed-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.race-info {
+  top: 120px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.race-info > div {
+  min-width: 125px;
+  padding: 15px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(10, 18, 31, 0.52);
+  backdrop-filter: blur(14px);
+}
+
+.race-info strong {
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.race-info small {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+}
+
+.control-hint {
+  bottom: 52px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: max-content;
+  max-width: calc(100% - 40px);
+  padding: 12px 17px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 12px;
+  background: rgba(10, 18, 31, 0.55);
+  color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
+
+.control-hint span:not(.hint-divider) {
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.hint-divider {
+  color: #55f3a5;
+}
+
+.game-footer {
+  right: 30px;
+  bottom: 20px;
+  left: 30px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.game-footer > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.mobile-controls {
+  right: 18px;
+  bottom: 65px;
+  left: 18px;
+  display: none;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  pointer-events: none;
+}
+
+.steering-controls,
+.pedal-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.pedal-controls {
+  align-items: flex-end;
+}
+
+.control-button {
+  display: grid;
+  min-width: 58px;
+  min-height: 58px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 17px;
+  color: #fff;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 900;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.control-button:active {
+  transform: scale(0.95);
+}
+
+.steer-button,
+.brake-button {
+  background: rgba(15, 25, 40, 0.75);
+}
+
+.brake-button,
+.gas-button {
+  min-width: 68px;
+  min-height: 64px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.gas-button {
+  background: rgba(25, 153, 96, 0.85);
+  border-color: rgba(135, 255, 195, 0.65);
+}
+
+.game-over {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(7, 12, 20, 0.48);
+  backdrop-filter: blur(5px);
+}
+
+.game-over-card {
+  width: min(390px, 100%);
+  padding: 35px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  background: rgba(13, 21, 34, 0.94);
+  text-align: center;
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.35);
+}
+
+.crash-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 20px;
+  place-items: center;
+  border-radius: 18px;
+  background: rgba(255, 75, 82, 0.15);
+  color: #ff646b;
+  font-size: 35px;
+  font-weight: 900;
+}
+
+.eyebrow {
+  color: #ff7379;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.game-over-card h2 {
+  margin: 10px 0;
+  font-size: 38px;
+  font-weight: 950;
+  letter-spacing: 1px;
+}
+
+.game-over-card > p:not(.eyebrow) {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.restart-button {
+  width: 100%;
+  margin-top: 17px;
+  padding: 15px;
+  border: 0;
+  border-radius: 12px;
+  background: #55e9a1;
+  color: #10271d;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 1.3px;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.restart-button:hover {
+  transform: translateY(-2px);
+  background: #7affb9;
+}
+
+@media (max-width: 700px) {
+  .top-hud {
+    top: 16px;
+    left: 15px;
+    right: 15px;
+  }
+
+  .brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .brand p {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .status-pill {
+    max-width: 145px;
+    padding: 9px 10px;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .speed-panel {
+    top: 80px;
+    left: 15px;
+    width: 155px;
+    padding: 13px;
+    border-radius: 13px;
+  }
+
+  .panel-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .speed-number {
+    gap: 5px;
+    font-size: 36px;
+  }
+
+  .speed-number span {
+    font-size: 8px;
+  }
+
+  .speed-track {
+    margin-top: 12px;
+  }
+
+  .race-info {
+    top: 80px;
+    right: 15px;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .race-info > div {
+    min-width: 108px;
+    padding: 9px 11px;
+    border-radius: 10px;
+  }
+
+  .info-label {
+    margin-bottom: 4px;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .race-info strong {
+    font-size: 13px;
+  }
+
+  .control-hint {
+    display: none;
+  }
+
+  .mobile-controls {
+    display: flex;
+    bottom: 58px;
+  }
+
+  .control-button {
+    min-width: 52px;
+    min-height: 52px;
+    border-radius: 15px;
+  }
+
+  .brake-button,
+  .gas-button {
+    min-width: 58px;
+    min-height: 58px;
+  }
+
+  .game-footer {
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+}
+
+@media (max-height: 600px) {
+  .speed-panel {
+    top: 85px;
+  }
+
+  .race-info {
+    top: 85px;
+  }
+
+  .mobile-controls {
+    bottom: 48px;
+  }
+
+  .game-footer {
+    bottom: 10px;
+  }
+}
+
+/* Start/finish screens and race progress */
+.start-overlay {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(5, 12, 20, 0.28);
+  backdrop-filter: blur(3px);
+}
+
+.start-card {
+  width: min(520px, 100%);
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 26px;
+  background: rgba(10, 19, 31, 0.88);
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.start-card h2 {
+  margin: 12px 0;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 950;
+  letter-spacing: -1.2px;
+}
+
+.start-card > p:not(.eyebrow) {
+  max-width: 380px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.start-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 5px;
+}
+
+.start-stats span {
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.5px;
+}
+
+.race-progress {
+  width: 100%;
+  height: 4px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.race-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #55f3a5;
+  transition: width 120ms linear;
+}
+
+.track-name {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 8px;
+  letter-spacing: 0.7px;
+}
+
+.final-score {
+  color: #55f3a5 !important;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.finish-icon {
+  background: rgba(85, 243, 165, 0.14);
+  color: #8dffc3;
+}
+
+.finish-eyebrow {
+  color: #8dffc3;
+}
+
+@media (max-width: 700px) {
+  .start-card { padding: 27px 20px; border-radius: 20px; }
+  .start-card > p:not(.eyebrow) { font-size: 12px; }
+  .start-stats { gap: 6px; margin-top: 17px; }
+  .start-stats span { font-size: 8px; padding: 8px; }
+  .race-info > div { min-width: 108px; }
+}
+
+@media (pointer: coarse) {
+  .mobile-controls { display: flex; }
+}
+
+
+/* Android/mobile refinements */
+@media (max-width: 700px), (pointer: coarse) {
+  .mobile-controls {
+    display: flex;
+    bottom: max(58px, calc(env(safe-area-inset-bottom) + 48px));
+  }
+
+  .control-button {
+    min-width: 58px;
+    min-height: 58px;
+  }
+
+  .brake-button,
+  .gas-button {
+    min-width: 64px;
+    min-height: 62px;
+  }
+
+  .start-card,
+  .game-over-card {
+    max-height: 82dvh;
+    overflow-y: auto;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .top-hud { top: 8px; }
+  .brand-icon { width: 30px; height: 30px; }
+  .brand h1 { font-size: 14px; }
+  .speed-panel { top: 55px; left: 10px; width: 135px; padding: 9px; }
+  .race-info { top: 55px; right: 10px; }
+  .mobile-controls { bottom: 34px; }
+  .control-button { min-width: 48px; min-height: 48px; }
+  .brake-button, .gas-button { min-width: 56px; min-height: 50px; }
+  .game-footer { bottom: 5px; }
+}
